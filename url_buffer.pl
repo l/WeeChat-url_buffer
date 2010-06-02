@@ -145,6 +145,10 @@ sub my_signal_cb
 	my $channel = shift;
 	my $msg = shift;
 
+	if (!defined $server || $server eq '' ||
+			!defined $channel || $channel eq '') {
+		return weechat::WEECHAT_RC_ERROR;
+	}
 	my ($num, $color) = &buffer_get_color($server, $channel);
 #	weechat::print($url_buffer, "$channel\t$msg");
 	my @uri = &uri_in_str($msg);
