@@ -149,8 +149,9 @@ sub my_signal_cb
 			!defined $channel || $channel eq '') {
 		return weechat::WEECHAT_RC_ERROR;
 	}
+
 	my ($num, $color) = &buffer_get_color($server, $channel);
-#	weechat::print($url_buffer, "$channel\t$msg");
+#	weechat::print($url_buffer, "$nick\t$msg");
 	my @uri = &uri_in_str($msg);
 	foreach (@uri) {
 		weechat::print($url_buffer, "$color$nick\t$_");
@@ -158,6 +159,7 @@ sub my_signal_cb
 #	if (@uri) {
 #		weechat::print($url_buffer, "$color$channel\t$msg");
 #	}
+
 	return weechat::WEECHAT_RC_OK;
 }
 
@@ -219,7 +221,7 @@ sub url_buffer_input_cb
 sub url_buffer_open
 {
 	my $url_buffer_name = shift;
-	$url_buffer = weechat::buffer_search("all", $url_buffer_name);
+	$url_buffer = weechat::buffer_search("perl", $url_buffer_name);
 
 	if ($url_buffer eq '')
 	{
